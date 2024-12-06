@@ -5,7 +5,7 @@ class Mail:
             # Initialize and log in to the SMTP server
             self.server = smtplib.SMTP('smtp.gmail.com', 587)
             self.server.starttls()
-            self.server.login(user="pradeepkalyan1275@gmail.com", password="owjg xgvn kupb qraw")  # Replace with a secure app password
+            self.server.login(user="pradeepkalyan1275@gmail.com", password="")  # Replace with a secure app password
 
     def send(self, to, message):
             self.server.sendmail(

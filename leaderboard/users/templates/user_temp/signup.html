@@ -127,6 +127,12 @@
           max-width: 100%;
         }
       }
+      .messages,.messages.error {
+        color: red;
+      }
+      .messages.success {
+        color: green;
+      }
     </style>
   </head>
   <body>
@@ -201,6 +207,13 @@
                 Sign Up
               </button>
             </div>
+            {% if messages %}
+            <ul class="messages">
+              {% for message in messages %}
+              <li class="{{ message.tags }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
           </form>
 
           <!-- Funny Code Snippet -->

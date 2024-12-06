@@ -103,6 +103,18 @@
         margin-top: 2rem;
         white-space: pre-wrap;
       }
+      .messages,.messages.error {
+        list-style-type: none;
+        padding: 0;
+        text-align: center;
+        color: red;
+      }
+      .messages.success{
+        list-style-type: none;
+        padding: 0;
+        text-align: center;
+        color: green;
+      }
     </style>
   </head>
   <body>
@@ -116,6 +128,7 @@
       <div class="card login-card">
         <div class="card-body">
           <h3 class="text-center mb-4">Login to GDG On Campus</h3>
+
           <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
             <div class="mb-3">
@@ -129,6 +142,13 @@
             <div class="text-center">
               <button type="submit" class="btn btn-primary w-100">Login</button>
             </div>
+            {% if messages %}
+            <ul class="messages">
+              {% for message in messages %}
+              <li class="{{ message.tags }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
           </form>
 
           <!-- Sign Up Link -->

@@ -30,12 +30,12 @@ def signup(request):
             )
             user.email = email
             user.save()
-            us = mail.Mail()
-            us.send(
-                to=email,
-                message=f"Subject: Welcome to GDGOC! \n\n Hello {username},\n\nThank you for joining Google Developer Groups on Campus ! We're excited to have you onboard with us .\n\nBest Regards,\nGDGOC Team",
-            )
-            print("Email sent!")
+            # us = mail.Mail()
+            # us.send(
+            #     to=email,
+            #     message=f"Subject: Welcome to GDGOC! \n\n Hello {username},\n\nThank you for joining Google Developer Groups on Campus ! We're excited to have you onboard with us .\n\nBest Regards,\nGDGOC Team",
+            # )
+            # print("Email sent!")
 
             # Show success message and redirect to login page
             messages.success(
