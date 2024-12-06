@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>GDG On Campus</title>
+    <link rel="icon" href="bfd67362-e75d-4b5b-bd54-f5f92f2d3c3c.jpg" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        background-color: #121212;
+        color: #ffffff;
+        font-family: "Courier New", monospace;
+      }
+      .navbar,
+      .footer,
+      .section-title,
+      .card {
+        background-color: #1f1f1f;
+      }
+      .navbar-brand,
+      .nav-link,
+      .footer p,
+      .card-body {
+        color: #ffffff !important;
+      }
+      .nav-link:hover {
+        color: #00aaff !important;
+      }
+      .btn-primary {
+        background-color: #00aaff;
+        border: none;
+      }
+      .btn-primary:hover {
+        background-color: #0088cc;
+      }
+      .about-section,
+      .clubs-section {
+        padding: 2rem 1rem;
+      }
+      .footer {
+        text-align: center;
+        padding: 1rem;
+      }
+      .code-snippet {
+        background-color: #2d2d2d;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 1rem;
+        margin-top: 2rem;
+        font-family: "Courier New", monospace;
+      }
+      .code-snippet .keyword {
+        color: #66d9ef; /* Cyan for keywords */
+      }
+      .code-snippet .string {
+        color: #f1fa8c; /* Yellow for strings */
+      }
+      .code-snippet .comment {
+        color: #75715e; /* Green for comments */
+      }
+      .terminal {
+        background-color: #1e1e1e;
+        color: #00ff00;
+        font-family: "Courier New", monospace;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 1rem;
+        margin-top: 2rem;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-lg my-3">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="#">GDG On Campus</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav ms-auto">
+            <a class="nav-link active" href="#">Home</a>
+            <a class="nav-link" href="#aboutus">About Us</a>
+            <a class="nav-link" href="#clubs">Clubs</a>
+            <a class="nav-link" href="#contactus">Contact Us</a>
+            <a href="https://linktr.ee/gdgocpec" class="btn btn-primary ms-3">Join Us</a>
+            {% comment %} <a href="/logout" class="btn btn-outline-light ms-2">Logout</a> {% endcomment %}
+            {% comment %} <a href="/admin" class="btn btn-outline-light ms-2">Admin</a> {% endcomment %}
+            <a href="{% url 'login' %}" class="btn btn-outline-light ms-2">Login</a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <section>
+        <div class="container-lg text-center my-5">
+          <h1 class="display-6 text-success">CONNECT, LEARN, GROW</h1>
+          <p>
+            Join GDG On Campus and be part of a global community dedicated to
+            technology, collaboration, and innovation. Gain hands-on experience,
+            attend workshops, and network with peers and industry experts.
+          </p>
+        </div>
+      </section>
+
+      <!-- About Us Section -->
+      <section id="aboutus" class="about-section">
+        <div class="container-lg text-center">
+          <h3 class="section-title my-4">ABOUT US</h3>
+          <p>
+            GDG On Campus is a vibrant community that brings together tech
+            enthusiasts, students, and professionals who are passionate about
+            technology, learning, and innovation. We aim to empower students
+            with industry-ready skills and a platform to explore, experiment,
+            and excel in various tech fields.
+          </p>
+          <p>
+            Our mission is to bridge the gap between academic learning and
+            industry requirements, offering an environment conducive to
+            knowledge sharing, collaboration, and skill development. From AI and
+            Machine Learning to Web Development and Cybersecurity, our clubs
+            provide a range of opportunities to grow and make an impact.
+          </p>
+          <div class="code-snippet">
+            <code>
+              <span class="comment">// Mission</span><br />
+              <span class="keyword">const</span> gdgMission =
+              <span class="string"
+                >"Empower students with industry-ready skills"</span
+              >;<br />
+              <span class="keyword">let</span> goal =
+              <span class="string"
+                >"Bridge the gap between academic learning and industry"</span
+              >;
+            </code>
+          </div>
+        </div>
+      </section>
+
+      <!-- Clubs Section -->
+      <section id="clubs" class="clubs-section">
+        <div class="container-lg text-center">
+          <h3 class="section-title my-4">Our Clubs</h3>
+          <p>
+            Our six clubs cater to a diverse range of interests in the tech
+            world. Each club provides specialized knowledge, practical
+            experience, and a supportive network for enthusiasts.
+          </p>
+          <div class="row">
+            <!-- Club 1: AI/ML Club -->
+            <div class="col-md-4 col-sm-6 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5><b>AI/ML Club 🤖💡</b></h5>
+                  <p>
+                    Dive into artificial intelligence and machine learning
+                    through projects, workshops, and collaboration on real-world
+                    applications.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Club 2: App Development Club -->
+            <div class="col-md-4 col-sm-6 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5><b>App Development Club 📱✨</b></h5>
+                  <p>
+                    Transform ideas into innovative apps! Learn to code, design,
+                    and create user-friendly applications for both Android and
+                    iOS.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Club 3: Cloud Computing Club -->
+            <div class="col-md-4 col-sm-6 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5><b>Cloud Computing Club ☁️🔧</b></h5>
+                  <p>
+                    Master the magic of the cloud! Gain expertise in cloud
+                    services, deployment strategies, and the future of scalable
+                    solutions.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Club 4: Cybersecurity & Ethical Hacking Club -->
+            <div class="col-md-4 col-sm-6 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5><b>Cybersecurity & Ethical Hacking Club 🔐🛡️</b></h5>
+                  <p>
+                    Become the shield of the digital world! Discover how to
+                    protect systems, crack the codes, and defend against cyber
+                    threats.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Club 5: Full Stack Web Development Club -->
+            <div class="col-md-4 col-sm-6 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5><b>Full Stack Web Development Club 🌐🛠️</b></h5>
+                  <p>
+                    Build the web from scratch! From frontend magic to backend
+                    power, learn to create responsive and stunning websites.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Club 6: Graphics, Gaming, & UI/UX Club -->
+            <div class="col-md-4 col-sm-6 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5><b>Graphics, Gaming, & UI/UX 🎮🎨</b></h5>
+                  <p>
+                    Unleash your creativity! Design immersive experiences,
+                    create captivating visuals, and bring games to life with
+                    extraordinary user interfaces.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Us Section -->
+      <section id="contactus" class="text-center my-4">
+        <div class="container-lg">
+          <h3 class="section-title">Contact Us</h3>
+          <p>Mobile No: +91</p>
+          <p>Email: gdgocpec@gmail.com</p>
+          <p>
+            Address: GDG On Campus, Prathyusha Engineering College, Tamil Nadu,
+            India
+          </p>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <div class="footer py-3">
+        <p>©2024 GDG On Campus - All rights reserved</p>
+      </div>
+
+      <!-- Terminal Example -->
+      <div class="terminal">
+        <span>$</span> git clone https://github.com/gdg-on-campus-repo<br />
+        <span>$</span> cd gdg-on-campus<br />
+        <span>$</span> npm start
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Programmer's Dashboard - GDG On Campus</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        background-color: #212121;
+        color: #ffffff;
+        font-family: "Courier New", monospace;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .navbar {
+        background-color: #333;
+        border-bottom: 2px solid #00aaff;
+        transition: background-color 0.3s ease;
+      }
+
+      .navbar-brand,
+      .nav-link {
+        color: #ffffff !important;
+        font-weight: bold;
+        transition: color 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: #00aaff !important;
+      }
+
+      .dashboard-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: 3rem;
+        transition: transform 0.3s ease-in-out;
+        flex-grow: 1; /* Ensures this area grows to fill remaining space */
+      }
+
+      .dashboard-card {
+        width: 100%;
+        max-width: 30%;
+        background-color: #333;
+        border-radius: 8px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      }
+
+      .dashboard-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .card-body {
+        padding: 2rem;
+        color: #ffffff;
+      }
+
+      .card-header {
+        font-size: 1.5rem;
+        font-weight: bold;
+        border-bottom: 2px solid #00aaff;
+        margin-bottom: 1rem;
+      }
+
+      .btn-primary {
+        background-color: #00aaff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        background-color: #0088cc;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 1rem;
+        background-color: #333;
+        width: 100%;
+        margin-top: auto; /* Ensures the footer is pushed to the bottom */
+      }
+
+      .activity-stat {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #00aaff;
+        margin-bottom: 1rem;
+      }
+
+      .progress {
+        background-color: #444;
+        border-radius: 20px;
+        height: 25px;
+      }
+
+      .progress-bar {
+        background-color: #00aaff;
+        border-radius: 20px;
+      }
+
+      .notification-card {
+        background-color: #444;
+        color: #fff;
+        padding: 1rem;
+        margin-top: 2rem;
+        border-radius: 5px;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .console {
+        background-color: #222;
+        color: #00ff00;
+        padding: 1rem;
+        font-family: "Courier New", monospace;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
+        margin-top: 2rem;
+        height: 300px;
+        overflow-y: auto;
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+      }
+
+      .console input {
+        background: transparent;
+        border: none;
+        color: #00ff00;
+        outline: none;
+        width: 100%;
+      }
+
+      .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+      }
+
+      .tech-card {
+        background-color: #333;
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+        width: 10rem;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .tech-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .tech-card img {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+      }
+
+      .achievement-progress {
+        margin-top: 2rem;
+        background-color: #444;
+        padding: 1rem;
+        border-radius: 8px;
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+      }
+
+      .achievement-progress .progress {
+        height: 20px;
+        background-color: #555;
+      }
+
+      .achievement-progress .progress-bar {
+        background-color: #00aaff;
+      }
+
+      .code-snippet {
+        background-color: #2d2d2d;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-family: "Courier New", monospace;
+        margin-top: 2rem;
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+      }
+
+      .code-snippet .keyword {
+        color: #66d9ef;
+      }
+
+      .code-snippet .string {
+        color: #f1fa8c;
+      }
+
+      .code-snippet .comment {
+        color: #75715e;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand" href="#">GDG On Campus</a>
+    </nav>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+      <!-- Welcome Card -->
+      <div class="card dashboard-card">
+        <div class="card-body">
+          <h4 class="card-header">Welcome, Club Member!</h4>
+          <p>Role: Active Member</p>
+          <p>Email: member.email@gdg.com</p>
+          <a href="profile.html"
+            ><button class="btn btn-primary">View Profile</button></a
+          >
+        </div>
+      </div>
+
+      <!-- Upcoming Events Card -->
+      <div class="card dashboard-card">
+        <div class="card-body">
+          <h4 class="card-header">Upcoming Events</h4>
+          <ul>
+            <li>AI/ML Workshop on Nov 20</li>
+            <li>GDG Hackathon - Dec 5</li>
+            <li>Club General Meeting - Nov 25</li>
+          </ul>
+          <button class="btn btn-primary">RSVP to Event</button>
+        </div>
+      </div>
+
+      <!-- Console Section -->
+      <div class="card dashboard-card">
+        <div class="card-body">
+          <h4 class="card-header">Terminal Console</h4>
+          <div class="console">
+            <p>
+              <strong>> _</strong> Welcome to the GDG On Campus console. Type
+              "help" for commands.
+            </p>
+            <input type="text" placeholder="Type your command..." />
+          </div>
+        </div>
+      </div>
+
+      <!-- Achievement Progress -->
+      <div class="card dashboard-card achievement-progress">
+        <div class="card-body">
+          <h4 class="card-header">Your Progress</h4>
+          <div class="activity-stat">Club Contribution: 70%</div>
+          <div class="progress">
+            <div class="progress-bar" style="width: 70%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tech Stack -->
+      <div class="card dashboard-card tech-stack">
+        <div class="card-body">
+          <h4 class="card-header">Tech Stack</h4>
+          <div class="tech-card">
+            <img src="https://img.icons8.com/ios/452/python.png" alt="Python" />
+            <p>Python</p>
+          </div>
+          <div class="tech-card">
+            <img
+              src="https://img.icons8.com/ios/452/javascript.png"
+              alt="JavaScript"
+            />
+            <p>JavaScript</p>
+          </div>
+          <div class="tech-card">
+            <img
+              src="https://img.icons8.com/ios/452/google-cloud.png"
+              alt="Google Cloud"
+            />
+            <p>Google Cloud</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code Snippet of the Day -->
+    <div class="code-snippet">
+      <h5>Code Snippet of the Day</h5>
+      <pre>
+        <span class="keyword">def</span> <span class="keyword">hello_world</span>():
+            <span class="comment"># This function prints a greeting message</span>
+            <span class="string">"Hello, World!"</span>
+    </pre>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2024 GDG On Campus. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
