@@ -15,10 +15,11 @@
       crossorigin="anonymous"
     />
     <style>
+      /* Programmer's Theme Colors */
       body {
-        background-color: #212121;
-        color: #ffffff;
-        font-family: "Courier New", monospace;
+        background-color: #0d1117;
+        color: #c9d1d9;
+        font-family: "Fira Code", monospace;
         margin: 0;
         padding: 0;
         display: flex;
@@ -26,312 +27,206 @@
         min-height: 100vh;
       }
 
-      html {
-        scroll-behavior: smooth;
-      }
-
       .navbar {
-        background-color: #333;
-        border-bottom: 2px solid #00aaff;
-        transition: background-color 0.3s ease;
+        background-color: #161b22;
+        border-bottom: 2px solid #58a6ff;
       }
 
       .navbar-brand,
       .nav-link {
         color: #ffffff !important;
         font-weight: bold;
-        transition: color 0.3s ease;
-      }
-
-      .nav-link:hover {
-        color: #00aaff !important;
       }
 
       .dashboard-container {
+        padding: 3rem;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
         gap: 2rem;
-        padding: 3rem;
-        transition: transform 0.3s ease-in-out;
-        flex-grow: 1; /* Ensures this area grows to fill remaining space */
       }
 
       .dashboard-card {
+        background: linear-gradient(145deg, #161b22, #0d1117);
+        color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
         width: 100%;
         max-width: 30%;
-        background-color: #333;
-        border-radius: 8px;
-        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 2px solid #58a6ff;
       }
 
       .dashboard-card:hover {
         transform: translateY(-10px);
-        box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
-      }
-
-      .card-body {
-        padding: 2rem;
-        color: #ffffff;
+        box-shadow: 0px 15px 30px rgba(88, 166, 255, 0.6);
       }
 
       .card-header {
         font-size: 1.5rem;
         font-weight: bold;
-        border-bottom: 2px solid #00aaff;
+        color: #58a6ff;
         margin-bottom: 1rem;
       }
 
       .btn-primary {
-        background-color: #00aaff;
+        background-color: #58a6ff;
         border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
         transition: background-color 0.3s ease;
       }
 
       .btn-primary:hover {
-        background-color: #0088cc;
+        background-color: #3178c6;
       }
 
+      /* Typing Animation */
+      .dynamic-text {
+        font-size: 1.2rem;
+        font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 2px solid #58a6ff;
+        width: 0;
+        animation: typing 3s steps(30, end), blink 0.5s step-end infinite;
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @keyframes blink {
+        50% {
+          border-color: transparent;
+        }
+      }
+
+      /* Glowing Border Effect */
+      .glow-border {
+        border: 2px solid #0d1117;
+        animation: glow 2s infinite;
+      }
+
+      @keyframes glow {
+        0% {
+          border-color: #58a6ff;
+          box-shadow: 0 0 10px #58a6ff;
+        }
+        50% {
+          border-color: #3178c6;
+          box-shadow: 0 0 20px #3178c6;
+        }
+        100% {
+          border-color: #58a6ff;
+          box-shadow: 0 0 10px #58a6ff;
+        }
+      }
+
+      /* Footer */
       .footer {
         text-align: center;
         padding: 1rem;
-        background-color: #333;
-        width: 100%;
-        margin-top: auto; /* Ensures the footer is pushed to the bottom */
-      }
-
-      .activity-stat {
-        font-size: 1.8rem;
-        font-weight: bold;
-        color: #00aaff;
-        margin-bottom: 1rem;
-      }
-
-      .progress {
-        background-color: #444;
-        border-radius: 20px;
-        height: 25px;
-      }
-
-      .progress-bar {
-        background-color: #00aaff;
-        border-radius: 20px;
-      }
-
-      .notification-card {
-        background-color: #444;
-        color: #fff;
-        padding: 1rem;
-        margin-top: 2rem;
-        border-radius: 5px;
-        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
-        opacity: 0;
-        animation: fadeIn 1s forwards;
-      }
-
-      @keyframes fadeIn {
-        0% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 1;
-        }
-      }
-
-      .console {
-        background-color: #222;
-        color: #00ff00;
-        padding: 1rem;
-        font-family: "Courier New", monospace;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
-        margin-top: 2rem;
-        height: 300px;
-        overflow-y: auto;
-        opacity: 0;
-        animation: fadeIn 1s forwards;
-      }
-
-      .console input {
-        background: transparent;
-        border: none;
-        color: #00ff00;
-        outline: none;
-        width: 100%;
-      }
-
-      .tech-stack {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        opacity: 0;
-        animation: fadeIn 1s forwards;
-      }
-
-      .tech-card {
-        background-color: #333;
-        padding: 1rem;
-        border-radius: 8px;
-        text-align: center;
-        width: 10rem;
-        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-      }
-
-      .tech-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
-      }
-
-      .tech-card img {
-        width: 60px;
-        height: 60px;
-        margin-bottom: 1rem;
-      }
-
-      .achievement-progress {
-        margin-top: 2rem;
-        background-color: #444;
-        padding: 1rem;
-        border-radius: 8px;
-        opacity: 0;
-        animation: fadeIn 1s forwards;
-      }
-
-      .achievement-progress .progress {
-        height: 20px;
-        background-color: #555;
-      }
-
-      .achievement-progress .progress-bar {
-        background-color: #00aaff;
-      }
-
-      .code-snippet {
-        background-color: #2d2d2d;
-        color: #f8f8f2;
-        padding: 15px;
-        border-radius: 5px;
-        font-size: 1rem;
-        font-family: "Courier New", monospace;
-        margin-top: 2rem;
-        opacity: 0;
-        animation: fadeIn 1s forwards;
-      }
-
-      .code-snippet .keyword {
-        color: #66d9ef;
-      }
-
-      .code-snippet .string {
-        color: #f1fa8c;
-      }
-
-      .code-snippet .comment {
-        color: #75715e;
+        background-color: #161b22;
+        margin-top: auto;
+        color: #58a6ff;
       }
     </style>
   </head>
   <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
-      <a class="navbar-brand" href="#">GDG On Campus</a>
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">GDG On Campus</a>
+        <div class="d-flex justify-content-end w-100">
+          <a class="nav-link logout" href="{% url 'logout'%}">Logout</a>
+        </div>
+      </div>
     </nav>
 
     <!-- Dashboard Container -->
     <div class="dashboard-container">
       <!-- Welcome Card -->
-      <div class="card dashboard-card">
+      <div class="card dashboard-card glow-border">
         <div class="card-body">
-          <h4 class="card-header">Welcome, Club Member!</h4>
-          <p>Role: Active Member</p>
-          <p>Email: member.email@gdg.com</p>
-          <a href="profile.html"
-            ><button class="btn btn-primary">View Profile</button></a
-          >
+          <h4 class="card-header">Welcome, Programmer!</h4>
+          <p class="dynamic-text">
+            "Code is like humor. When you have to explain it, it's bad."
+          </p>
+          <a href="profile.html">
+            <button class="btn btn-primary">View Profile</button>
+          </a>
         </div>
       </div>
 
-      <!-- Upcoming Events Card -->
-      <div class="card dashboard-card">
+      <!-- Leaderboard -->
+      <div class="card dashboard-card glow-border">
         <div class="card-body">
-          <h4 class="card-header">Upcoming Events</h4>
+          <h4 class="card-header">Top 10 Contributors</h4>
+          <table class="table text-light">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>John Doe</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jane Smith</td>
+                <td>450</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Event Summary -->
+      <div class="card dashboard-card glow-border">
+        <div class="card-body">
+          <h4 class="card-header">Event Summary</h4>
+          <p>Upcoming Event: Build with AI</p>
+          <p>Date: Dec 20, 2024</p>
+          <a href="event_details.html">
+            <button class="btn btn-primary">View Details</button>
+          </a>
+        </div>
+      </div>
+
+      <!-- Participation History -->
+      <div class="card dashboard-card glow-border">
+        <div class="card-body">
+          <h4 class="card-header">Participation History</h4>
           <ul>
-            <li>AI/ML Workshop on Nov 20</li>
-            <li>GDG Hackathon - Dec 5</li>
-            <li>Club General Meeting - Nov 25</li>
+            <li>Build with AI - Nov 2024</li>
+            <li>DSA Workshop - Oct 2024</li>
           </ul>
-          <button class="btn btn-primary">RSVP to Event</button>
         </div>
       </div>
 
-      <!-- Console Section -->
-      <div class="card dashboard-card">
+      <!-- Points Overview -->
+      <div class="card dashboard-card glow-border">
         <div class="card-body">
-          <h4 class="card-header">Terminal Console</h4>
-          <div class="console">
-            <p>
-              <strong>> _</strong> Welcome to the GDG On Campus console. Type
-              "help" for commands.
-            </p>
-            <input type="text" placeholder="Type your command..." />
-          </div>
+          <h4 class="card-header">Points Overview</h4>
+          <p>Total Points: 1200</p>
+          <a href="points.html">
+            <button class="btn btn-primary">View Breakdown</button>
+          </a>
         </div>
       </div>
-
-      <!-- Achievement Progress -->
-      <div class="card dashboard-card achievement-progress">
-        <div class="card-body">
-          <h4 class="card-header">Your Progress</h4>
-          <div class="activity-stat">Club Contribution: 70%</div>
-          <div class="progress">
-            <div class="progress-bar" style="width: 70%"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tech Stack -->
-      <div class="card dashboard-card tech-stack">
-        <div class="card-body">
-          <h4 class="card-header">Tech Stack</h4>
-          <div class="tech-card">
-            <img src="https://img.icons8.com/ios/452/python.png" alt="Python" />
-            <p>Python</p>
-          </div>
-          <div class="tech-card">
-            <img
-              src="https://img.icons8.com/ios/452/javascript.png"
-              alt="JavaScript"
-            />
-            <p>JavaScript</p>
-          </div>
-          <div class="tech-card">
-            <img
-              src="https://img.icons8.com/ios/452/google-cloud.png"
-              alt="Google Cloud"
-            />
-            <p>Google Cloud</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Code Snippet of the Day -->
-    <div class="code-snippet">
-      <h5>Code Snippet of the Day</h5>
-      <pre>
-        <span class="keyword">def</span> <span class="keyword">hello_world</span>():
-            <span class="comment"># This function prints a greeting message</span>
-            <span class="string">"Hello, World!"</span>
-    </pre>
     </div>
 
     <!-- Footer -->
     <footer class="footer">
-      <p>&copy; 2024 GDG On Campus. All Rights Reserved.</p>
+      <p>&copy; 2024 GDG On Campus. Happy Coding!</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

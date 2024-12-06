@@ -3,12 +3,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate
-from .forms import SignupForm, Signinform
-from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
-from django.conf import settings
-from django.core.mail import send_mail
+from .forms import SignupForm, Signinform, ForgotpwdForm
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
 from . import mail as mail
+
 
 def signup(request):
     if request.method == "POST":
@@ -60,7 +59,7 @@ def login(request):
         if form.is_valid():
             email = form.cleaned_data["email"]  # Using email as username field
             password = form.cleaned_data["password"]
-            print(email, password)
+            # print(email, password)
 
             # Try to get the user by email
             try:
@@ -73,10 +72,10 @@ def login(request):
             user = authenticate(request, username=user.username, password=password)
 
             if user is not None:
-                login(request, user)
+                auth_login(request, user)
                 messages.success(request, "Login successful!")
                 return redirect(
-                    "lb"
+                    "leaderboard"
                 )  # Redirect to the desired page after successful login
             else:
                 messages.error(request, "Invalid email or password.")
@@ -92,3 +91,24 @@ def login(request):
         form = Signinform()
 
     return render(request, "user_temp/login.html", {"form": form})
+
+def logout(request):
+    auth_logout(request)
+    return redirect("/")
+
+def forgotpwd(request):
+    if request.method == "POST":
+        form = ForgotpwdForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data["email"]  # Using email as username field
+            print(email)
+        else:
+            messages.error(
+                request, "There was an error with your form. Please try again."
+            )
+            return render(request, "user_temp/login.html", {"form": form})
+
+    else:
+        form = ForgotpwdForm()
+
+    return render(request, "user_temp/forgot.html", {"form": form})

@@ -53,4 +53,15 @@ class Signinform(forms.models.ModelForm):
 
     class Meta:
         model = User
-        fields = ["username", "password"]
+        fields = ["email", "password"]
+
+class ForgotpwdForm(forms.ModelForm):
+    email = forms.EmailField(
+        widget=forms.TextInput(
+            attrs={"placeholder": "Enter your email ", "class": "form-control"}
+        )
+    )
+
+    class Meta:
+        model = User
+        fields = ["email"]

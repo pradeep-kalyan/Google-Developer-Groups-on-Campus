@@ -128,7 +128,7 @@
     <div class="login-container">
       <div class="card login-card">
         <div class="card-body">
-          <h3 class="text-center mb-4">Login to GDG On Campus</h3>
+          <h3 class="text-center mb-4">Password on vacation? <br> Let’s bring it back!</h3>
 
           <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
@@ -136,12 +136,8 @@
               <label for="mail" class="form-label">Email</label>
               {{ form.email}}
             </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              {{ form.password }}
-            </div>
             <div class="text-center">
-              <button type="submit" class="btn btn-primary w-100">Login</button>
+              <button type="submit" class="btn btn-primary w-100">I’m ready to reset!</button>
             </div>
             {% if messages %}
             <ul class="messages">
@@ -153,9 +149,9 @@
           </form>
           <div class="text-center mt-3">
             <p>
-              Can’t remember?
-              <a href="{% url 'forgotpwd'%}" class="text-info"
-                >Let’s make a fresh start!</a
+              Got it?
+              <a href="{% url 'login'%}" class="text-info"
+                >Login</a
               >
             </p>
           </div>
