@@ -1,234 +1,123 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Programmer's Dashboard - GDG On Campus</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <style>
-      /* Programmer's Theme Colors */
-      body {
-        background-color: #0d1117;
-        color: #c9d1d9;
-        font-family: "Fira Code", monospace;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-      }
-
-      .navbar {
-        background-color: #161b22;
-        border-bottom: 2px solid #58a6ff;
-      }
-
-      .navbar-brand,
-      .nav-link {
-        color: #ffffff !important;
-        font-weight: bold;
-      }
-
-      .dashboard-container {
-        padding: 3rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-      }
-
-      .dashboard-card {
-        background: linear-gradient(145deg, #161b22, #0d1117);
-        color: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
-        width: 100%;
-        max-width: 30%;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: 2px solid #58a6ff;
-      }
-
-      .dashboard-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0px 15px 30px rgba(88, 166, 255, 0.6);
-      }
-
-      .card-header {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #58a6ff;
-        margin-bottom: 1rem;
-      }
-
-      .btn-primary {
-        background-color: #58a6ff;
-        border: none;
-        transition: background-color 0.3s ease;
-      }
-
-      .btn-primary:hover {
-        background-color: #3178c6;
-      }
-
-      /* Typing Animation */
-      .dynamic-text {
-        font-size: 1.2rem;
-        font-weight: bold;
-        white-space: nowrap;
-        overflow: hidden;
-        border-right: 2px solid #58a6ff;
-        width: 0;
-        animation: typing 3s steps(30, end), blink 0.5s step-end infinite;
-      }
-
-      @keyframes typing {
-        from {
-          width: 0;
-        }
-        to {
-          width: 100%;
-        }
-      }
-
-      @keyframes blink {
-        50% {
-          border-color: transparent;
-        }
-      }
-
-      /* Glowing Border Effect */
-      .glow-border {
-        border: 2px solid #0d1117;
-        animation: glow 2s infinite;
-      }
-
-      @keyframes glow {
-        0% {
-          border-color: #58a6ff;
-          box-shadow: 0 0 10px #58a6ff;
-        }
-        50% {
-          border-color: #3178c6;
-          box-shadow: 0 0 20px #3178c6;
-        }
-        100% {
-          border-color: #58a6ff;
-          box-shadow: 0 0 10px #58a6ff;
-        }
-      }
-
-      /* Footer */
-      .footer {
-        text-align: center;
-        padding: 1rem;
-        background-color: #161b22;
-        margin-top: auto;
-        color: #58a6ff;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">GDG On Campus</a>
-        <div class="d-flex justify-content-end w-100">
-          <a class="nav-link logout" href="{% url 'logout'%}">Logout</a>
-        </div>
+{% extends "base.html" %} {% block title %}Leaderboard{% endblock %} 
+{% block content %}
+<!-- Your content goes here -->
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+  <!-- Welcome Card -->
+  <div class="card dashboard-card glow-border">
+    <div class="card-body">
+      <h4 class="card-header">Welcome, {{user.username}}</h4>
+      <div class="quote-box">
+        <p class="dynamic-text quote-text">{{quotes}}</p>
       </div>
-    </nav>
-
-    <!-- Dashboard Container -->
-    <div class="dashboard-container">
-      <!-- Welcome Card -->
-      <div class="card dashboard-card glow-border">
-        <div class="card-body">
-          <h4 class="card-header">Welcome, Programmer!</h4>
-          <p class="dynamic-text">
-            "Code is like humor. When you have to explain it, it's bad."
-          </p>
-          <a href="profile.html">
-            <button class="btn btn-primary">View Profile</button>
-          </a>
-        </div>
-      </div>
-
-      <!-- Leaderboard -->
-      <div class="card dashboard-card glow-border">
-        <div class="card-body">
-          <h4 class="card-header">Top 10 Contributors</h4>
-          <table class="table text-light">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Points</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>John Doe</td>
-                <td>500</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jane Smith</td>
-                <td>450</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Event Summary -->
-      <div class="card dashboard-card glow-border">
-        <div class="card-body">
-          <h4 class="card-header">Event Summary</h4>
-          <p>Upcoming Event: Build with AI</p>
-          <p>Date: Dec 20, 2024</p>
-          <a href="event_details.html">
-            <button class="btn btn-primary">View Details</button>
-          </a>
-        </div>
-      </div>
-
-      <!-- Participation History -->
-      <div class="card dashboard-card glow-border">
-        <div class="card-body">
-          <h4 class="card-header">Participation History</h4>
-          <ul>
-            <li>Build with AI - Nov 2024</li>
-            <li>DSA Workshop - Oct 2024</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Points Overview -->
-      <div class="card dashboard-card glow-border">
-        <div class="card-body">
-          <h4 class="card-header">Points Overview</h4>
-          <p>Total Points: 1200</p>
-          <a href="points.html">
-            <button class="btn btn-primary">View Breakdown</button>
-          </a>
-        </div>
-      </div>
+      <br />
+      <a href="{% url 'user_profile' %}">
+        <button class="btn btn-primary">View Profile</button>
+      </a>
     </div>
+  </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <p>&copy; 2024 GDG On Campus. Happy Coding!</p>
-    </footer>
+  <!-- Leaderboard -->
+  <div class="card dashboard-card glow-border">
+    <div class="card-body">
+      <h4 class="card-header">Top 10 Contributors</h4>
+      <table class="table text-light">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>John Doe</td>
+            <td>500</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Jane Smith</td>
+            <td>450</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-</html>
+  <!-- Event Summary -->
+  <div class="card dashboard-card glow-border">
+    <div class="card-body">
+      <h4 class="card-header">Event Summary</h4>
+      <p>Upcoming Event: Build with AI</p>
+      <p>Date: Dec 20, 2024</p>
+      <a href="event_details.html">
+        <button class="btn btn-primary">View Details</button>
+      </a>
+    </div>
+  </div>
+
+  <!-- Participation History -->
+  <div class="card dashboard-card glow-border">
+    <div class="card-body">
+      <h4 class="card-header">Participation History</h4>
+      <ul>
+        <li>Build with AI - Nov 2024</li>
+        <li>DSA Workshop - Oct 2024</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Points Overview -->
+  <div class="card dashboard-card glow-border">
+    <div class="card-body">
+      <h4 class="card-header">Points Overview</h4>
+      <p>Total Points: 1200</p>
+      <a href="points.html">
+        <button class="btn btn-primary">View Breakdown</button>
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_styles %}
+<style>
+  /* Quote Box Styling */
+  .quote-box {
+    background: linear-gradient(145deg, #2d333b, #141a1f);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    margin-bottom: 20px;
+    animation: fadeIn 2s ease-out;
+  }
+
+  .quote-text {
+    color: #58a6ff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: "Fira Code", monospace;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Fade In Effect */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /* Hover Effect */
+  .quote-box:hover {
+    box-shadow: 0 0 15px rgba(88, 166, 255, 0.7);
+    transform: translateY(-5px);
+  }
+</style>
+{% endblock %}
+

@@ -130,7 +130,7 @@
         <div class="card-body">
           <h3 class="text-center mb-4">Password on vacation? <br> Let’s bring it back!</h3>
 
-          <form method="POST" action="{% url 'login' %}">
+          <form method="POST" action="{% url 'forgotpwd' %}">
             {% csrf_token %}
             <div class="mb-3">
               <label for="mail" class="form-label">Email</label>

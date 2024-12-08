@@ -2,6 +2,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from .models import Profile
 
 
 class SignupForm(forms.ModelForm):
@@ -55,6 +56,7 @@ class Signinform(forms.models.ModelForm):
         model = User
         fields = ["email", "password"]
 
+
 class ForgotpwdForm(forms.ModelForm):
     email = forms.EmailField(
         widget=forms.TextInput(
@@ -65,3 +67,62 @@ class ForgotpwdForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ["email"]
+
+
+from django import forms
+from django.contrib.auth.models import User
+
+
+from django import forms
+from .models import Profile
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ["bio", "github", "linkedin", "first_name", "last_name"]
+        widgets = {
+            "bio": forms.Textarea(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Tell us about yourself",
+                }
+            ),
+            "github": forms.URLInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Enter your GitHub URL",
+                }
+            ),
+            "linkedin": forms.URLInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Enter your LinkedIn URL",
+                }
+            ),
+            "first_name": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Enter your first name",
+                }
+            ),
+            "last_name": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Enter your last name",
+                }
+            ),
+        }
+
+
+class ProfilePictureForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ["profile_picture"]
+        widgets = {
+            "profile_picture": forms.ClearableFileInput(
+                attrs={
+                    "class": "form-control",
+                }
+            ),
+        }
