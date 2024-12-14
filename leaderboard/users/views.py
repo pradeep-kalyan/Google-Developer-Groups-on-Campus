@@ -21,9 +21,13 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import views as auth_views  # Ensure this import is included
 from django.contrib.auth.forms import SetPasswordForm, PasswordResetForm
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from .models import Profile
 import json
+from django.conf import settings
+from social_django.utils import load_strategy, load_backend
+from social_core.actions import do_auth
+from social_core.exceptions import AuthException, AuthForbidden
 
 
 def signup(request):
@@ -229,3 +233,4 @@ def profile(request):
             "profile": profile,
         },
     )
+

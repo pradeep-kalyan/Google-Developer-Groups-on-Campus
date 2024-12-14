@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.urls import path
-from . import views 
+from . import views
 
 urlpatterns = [
-    path('', views.events,name="evnts"),
+    path("", views.events, name="evnts"),
 ]

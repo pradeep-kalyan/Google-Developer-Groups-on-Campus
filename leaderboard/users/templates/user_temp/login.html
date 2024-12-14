@@ -1,3 +1,4 @@
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -132,7 +133,7 @@
             {% csrf_token %}
             <div class="mb-3">
               <label for="mail" class="form-label">Email</label>
-              {{ form.email}}
+              {{ form.email }}
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
@@ -149,6 +150,14 @@
             </ul>
             {% endif %}
           </form>
+          <div class="text-center mt-3">
+            <p>
+              Tired of remembering passwords?
+              <a href=" {% provider_login_url 'github' %} " class="text-info"
+                >Let’s use Github</a
+              >
+            </p>
+          </div>
           <div class="text-center mt-3">
             <p>
               Can’t remember?

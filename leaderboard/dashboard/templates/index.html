@@ -18,6 +18,10 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <script
+      src="https://kit.fontawesome.com/31b1fdb992.js"
+      crossorigin="anonymous"
+    ></script>
     <style>
       body {
         background-color: #121212;
@@ -103,10 +107,12 @@
             <a class="nav-link" href="#aboutus">About Us</a>
             <a class="nav-link" href="#clubs">Clubs</a>
             <a class="nav-link" href="#contactus">Contact Us</a>
-            <a href="https://linktr.ee/gdgocpec" class="btn btn-primary ms-3">Join Us</a>
-            {% comment %} <a href="/logout" class="btn btn-outline-light ms-2">Logout</a> {% endcomment %}
-            {% comment %} <a href="/admin" class="btn btn-outline-light ms-2">Admin</a> {% endcomment %}
-            <a href="{% url 'login' %}" class="btn btn-outline-light ms-2">Login</a>
+            <a href="https://linktr.ee/gdgocpec" class="btn btn-primary ms-3"
+              >Join Us</a
+            >
+            <a href="{% url 'login' %}" class="btn btn-outline-light ms-2"
+              >Login</a
+            >
           </div>
         </div>
       </nav>
@@ -126,7 +132,9 @@
       <!-- About Us Section -->
       <section id="aboutus" class="about-section">
         <div class="container-lg text-center">
-          <h3 class="section-title my-4">ABOUT US</h3>
+          <h3 class="section-title my-4">
+            ABOUT US <i class="bi bi-info-circle"></i>
+          </h3>
           <p>
             GDG On Campus is a vibrant community that brings together tech
             enthusiasts, students, and professionals who are passionate about
@@ -251,12 +259,27 @@
       <!-- Contact Us Section -->
       <section id="contactus" class="text-center my-4">
         <div class="container-lg">
-          <h3 class="section-title">Contact Us</h3>
-          <p>Mobile No: +91</p>
-          <p>Email: gdgocpec@gmail.com</p>
+          <h3 class="section-title">
+            Contact Us <i class="fa-regular fa-address-book"></i>
+          </h3>
+          <p>
+            Mobile No: +91
+            <a href="tel:+919876543210"
+              ><i class="bi bi-telephone-outbound"></i
+            ></a>
+          </p>
+          <p>
+            Email: gdgocpec@gmail.com
+            <a href="mailto:gdgocpec@gmail.com"
+              ><i class="bi bi-envelope"></i
+            ></a>
+          </p>
           <p>
             Address: GDG On Campus, Prathyusha Engineering College, Tamil Nadu,
             India
+            <a href="https://maps.app.goo.gl/rCK9F7n1KCWMrNS76"
+              ><i class="bi bi-geo-alt"></i
+            ></a>
           </p>
         </div>
       </section>

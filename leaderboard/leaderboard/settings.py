@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 
+# import social_core.backends.github
+# import django.contrib.auth.backends
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,11 +41,18 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.github",
     "dashboard",
     "lb",
     "users",
     "events",
 ]
+
+# Ensure AUTH_USER_MODEL is set if using a custom user model
+# AUTH_USER_MODEL = 'your_app.CustomUser'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -52,6 +62,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "leaderboard.urls"
@@ -125,7 +136,7 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Media files (Profile Pictures, etc.)
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -140,5 +151,20 @@ EMAIL_HOST_USER = "pradeepkalyan1275@gmail.com"
 EMAIL_HOST_PASSWORD = "owjg xgvn kupb qraw"  # Or app-specific password
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-LOGIN_URL = '/users'
+LOGIN_URL = "/users"
 
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    "github": {
+        "APP": {
+            "client_id": "Ov23li9G1CGammQ4eD3R",
+            "secret": "9d665e0be2b7f8beed025ba56745b66736c5c3eb",
+        }
+    }
+}
+SOCIALACCOUNT_LOGIN_ON_GET = True
+LOGIN_REDIRECT_URL = "/leaderboard/"

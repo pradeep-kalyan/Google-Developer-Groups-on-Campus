@@ -1,8 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User  # Import the User model
 
-# Create your models here.
-# events/models.py
-from django.db import models
 
 class Event(models.Model):
     event_id = models.IntegerField(unique=True)
