@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -264,6 +265,13 @@
                 </div>
               </div>
             </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="id_linkedin" class="form-label">Want to link your Github account <a href="{% provider_login_url 'github' %}"> Let's GO </a> </label>
+              </div>
+            </div>
+          </div>
+
 
             <!-- Save Button -->
             <button type="submit" class="btn btn-primary">Save Changes</button>

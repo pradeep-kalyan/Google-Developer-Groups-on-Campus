@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+# from .models import Event
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -13,14 +14,11 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.user.username}'s profile"
 
-    
-# users/models.py
-
-# class User(models.Model):
-#     user_id = models.IntegerField(unique=True)
-#     points = models.IntegerField(default=0)
-#     streak = models.IntegerField(default=0)
-#     last_attended_event = models.IntegerField(null=True, blank=True)
+# class Participant(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='members')
+#     event = models.ManyToManyField(Event, related_name='participants')
+#     # score = models.IntegerField()
 
 #     def __str__(self):
-#         return f"User {self.user_id}: Points={self.points}, Streak={self.streak}"
+#         return f"{self.user.username} at {self.event.name} with score {self.score}"
+

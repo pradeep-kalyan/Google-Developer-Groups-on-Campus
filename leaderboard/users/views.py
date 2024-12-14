@@ -27,6 +27,7 @@ import json
 from django.conf import settings
 from social_django.utils import load_strategy, load_backend
 from social_core.actions import do_auth
+from social_core.backends.github import GithubOAuth2
 from social_core.exceptions import AuthException, AuthForbidden
 
 
@@ -163,32 +164,6 @@ class CustomPasswordResetCompleteView(auth_views.PasswordResetCompleteView):
         return reverse_lazy("users/")
 
 
-@staff_member_required
-def process_attendance(request):
-    with open("attendance_data.json") as f:
-        attendance_data = json.load(f)
-
-    for entry in attendance_data["attendees"]:
-        user, created = User.objects.get_or_create(id=entry["user_id"])
-
-        user.points += 100
-
-        last_event = user.last_attended_event
-        current_event = entry["event_id"]
-
-        if last_event is None or current_event == last_event + 1:
-            user.streak += 1
-        else:
-            user.streak = 1
-
-        user.last_attended_event = current_event
-        user.save()
-
-    return JsonResponse(
-        {"message": "User attendance processed successfully"}, status=200
-    )
-
-
 from django.shortcuts import render, redirect
 from .forms import ProfileForm, ProfilePictureForm
 from django.contrib.auth.decorators import login_required
@@ -234,3 +209,73 @@ def profile(request):
         },
     )
 
+def github_login(request):
+    strategy = load_strategy(request)
+    backend = GithubOAuth2(strategy=strategy)
+
+    try:
+        # Perform authentication via GitHub
+        user = backend.do_auth(request.GET.get("code"))
+    except AuthException as e:
+        messages.error(request, f"GitHub authentication failed: {e}")
+        return redirect("login")
+
+    if user:
+        # Fetch GitHub email
+        github_email = user.email
+
+        # Check if the email matches an existing user
+        existing_user = User.objects.filter(email=github_email).first()
+        if existing_user:
+            # Merge accounts by linking GitHub with the existing user
+            if user != existing_user:
+                user.delete()  # Delete the duplicate account
+                backend.associate(existing_user)  # Link GitHub to the existing account
+                user = existing_user
+
+            messages.success(request, "Your GitHub account has been linked successfully!")
+        else:
+            messages.success(request, "GitHub account authenticated successfully!")
+
+        auth_login(request, user)
+        return redirect("leaderboard")
+    else:
+        messages.error(request, "GitHub login failed.")
+        return redirect("login")
+
+@login_required
+def edit_profile(request):
+    profile = request.user.profile
+
+    if request.method == "POST":
+        profile_form = ProfileForm(request.POST, instance=profile)
+
+        if profile_form.is_valid():
+            profile_form.save()
+
+            # Optionally, add logic to link GitHub
+            if 'github_link' in request.POST:
+                github_link = request.POST.get('github_link')
+                if github_link:
+                    strategy = load_strategy(request)
+                    backend = GithubOAuth2(strategy=strategy)
+                    try:
+                        github_user = backend.do_auth(request.POST.get("code"))
+                        if github_user:
+                            profile.github_account = github_user.username
+                            profile.save()
+                            messages.success(request, "GitHub account linked successfully!")
+                    except AuthException as e:
+                        messages.error(request, f"GitHub linking failed: {e}")
+
+            messages.success(request, "Profile updated successfully!")
+            return redirect("edit_profile")
+
+    else:
+        profile_form = ProfileForm(instance=profile)
+    return render(request, "user_temp/edit_profile.html", {"profile_form": profile_form, "profile": profile})
+
+# Ensure that the Profile model has a field for GitHub account, e.g., github_account = models.CharField(max_length=255, blank=True)
+
+# Add GitHub login URL generator to templates
+# In the templates like login.html or edit_profile.html, use {% provider_login_url 'github' %} to create GitHub login links.
